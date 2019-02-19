@@ -2,6 +2,7 @@ package com.example.applicationcpp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,11 +18,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Example of a call to a native method
-        TextView tv = findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
-        tv.setText(stringFromHaha("haha"));
-        tv.setText(String.valueOf(stringFromHaha2("haha")));
-        testArray();
+        final TextView tv = findViewById(R.id.sample_text);
+
+
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                tv.setText(stringFromJNI());
+                tv.setText(stringFromHaha("haha"));
+                tv.setText(String.valueOf(stringFromHaha2("haha")));
+                testArray();
+
+                testTemplate();
+
+
+                CppArray.testArray();
+            }
+        });
     }
 
     /**
@@ -32,4 +46,5 @@ public class MainActivity extends AppCompatActivity {
     public native String stringFromHaha(String v);
     public native int stringFromHaha2(String v);
     public native int testArray();
+    public native int testTemplate ();
 }
